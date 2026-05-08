@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}FutureShop — Início{% endblock %}
+
+{% block content %}
+
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Produtos que <span>você precisa</span></h1>
+    <p>Qualidade, estilo e os melhores preços em um só lugar.</p>
+    <a href="#produtos" class="btn-primary">Ver Produtos</a>
+  </div>
+</section>
+
+
+
+
+
+<section class="filtro" id="produtos">
+  <a href="{{ url_for('index') }}"
+     class="tag {% if not categoria_ativa %}tag-ativa{% endif %}">Todos</a>
+  {% for c in categorias %}
+    <a href="{{ url_for('index', categoria=c['categoria']) }}"
+       class="tag {% if categoria_ativa == c['categoria'] %}tag-ativa{% endif %}">
+      {{ c['categoria'] }}
+    </a>
+  {% endfor %}
+</section>
+
+
+<section class="produtos-grid">
+  {% for p in produtos %}
+  <div class="card-produto">
+    <div class="card-img">
+      <div class="img-placeholder">{{ p['nome'][0] }}</div>
+    </div>
+    <div class="card-info">
+      <span class="card-categoria">{{ p['categoria'] }}</span>
+      <h3>{{ p['nome'] }}</h3>
+      <p>{{ p['descricao'] }}</p>
+      <div class="card-footer">
+        <span class="preco">R$ {{ "%.2f"|format(p['preco']) }}</span>
+        <div class="card-actions">
+          <a href="{{ url_for('produto', id=p['id']) }}" class="btn-outline">Ver</a>
+          <button class="btn-primary"
+            onclick="addCarrinho({{ p['id'] }}, '{{ p['nome'] }}', {{ p['preco'] }})">
+            + Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+    <p class="sem-produtos">Nenhum produto encontrado nessa categoria.</p>
+  {% endfor %}
+</section>
+
+{% endblock %}

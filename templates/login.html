@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}FutureShop — Login{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+  <div class="auth-card">
+    <h2>Entrar na sua conta</h2>
+    <p class="auth-sub">Não tem conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a></p>
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary btn-block">Entrar</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

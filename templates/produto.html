@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}FutureShop — {{ produto['nome'] }}{% endblock %}
+
+{% block content %}
+<section class="produto-detalhe">
+
+  <div class="prod-img-wrap">
+    <div class="img-placeholder-lg">{{ produto['nome'][0] }}</div>
+  </div>
+
+
+  <div class="prod-info">
+    <span class="card-categoria">{{ produto['categoria'] }}</span>
+    <h1>{{ produto['nome'] }}</h1>
+    <p class="prod-desc">{{ produto['descricao'] }}</p>
+    <p class="prod-preco">R$ {{ "%.2f"|format(produto['preco']) }}</p>
+
+    <div class="prod-qty">
+      <label for="qty">Quantidade:</label>
+      <input type="number" id="qty" value="1" min="1" max="99" />
+    </div>
+
+    <div class="prod-actions">
+      <button class="btn-primary btn-lg"
+        onclick="addCarrinhoQty({{ produto['id'] }}, '{{ produto['nome'] }}', {{ produto['preco'] }})">
+        🛒 Adicionar ao Carrinho
+      </button>
+      <a href="{{ url_for('index') }}" class="btn-outline">← Voltar</a>
+    </div>
+
+    {% if not usuario %}
+    <p class="prod-aviso">
+      <a href="{{ url_for('login') }}">Faça login</a> para finalizar seu pedido.
+    </p>
+    {% endif %}
+  </div>
+
+</section>
+{% endblock %}

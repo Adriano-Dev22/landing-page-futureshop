@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}FutureShop — Minha Conta{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+
+
+
+  <div class="dash-header">
+    <div class="dash-avatar">{{ usuario['nome'][0].upper() }}</div>
+    <div>
+      <h2>Olá, {{ usuario['nome'].split()[0] }}!</h2>
+      <p>{{ usuario['email'] }}</p>
+      <span class="badge">Cliente desde {{ usuario['data_criacao'][:10] }}</span>
+    </div>
+  </div>
+
+  <div class="dash-stats">
+    <div class="stat-card">
+      <span class="stat-num">{{ pedidos|length }}</span>
+      <span class="stat-label">Pedidos realizados</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">
+        R$ {{ "%.2f"|format(pedidos|sum(attribute='preco')) if pedidos else '0,00' }}
+      </span>
+      <span class="stat-label">Total gasto</span>
+    </div>
+  </div>
+
+
+
+
+  <div class="dash-section">
+    <h3>Histórico de Pedidos</h3>
+
+    {% if pedidos %}
+      <table class="pedidos-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Produto</th>
+            <th>Qtd</th>
+            <th>Valor unit.</th>
+            <th>Subtotal</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for p in pedidos %}
+          <tr>
+            <td>{{ p['id'] }}</td>
+            <td>{{ p['prod_nome'] }}</td>
+            <td>{{ p['quantidade'] }}</td>
+            <td>R$ {{ "%.2f"|format(p['preco']) }}</td>
+            <td>R$ {{ "%.2f"|format(p['preco'] * p['quantidade']) }}</td>
+            <td>{{ p['data'][:10] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty-state">
+        <p>Você ainda não fez nenhum pedido.</p>
+        <a href="{{ url_for('index') }}" class="btn-primary">Ver produtos</a>
+      </div>
+    {% endif %}
+  </div>
+
+</section>
+{% endblock %}
