@@ -39,13 +39,13 @@ FutureShop/
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/SEU_USUARIO/landing-page-futureshop.git
+git clone https://github.com/Adriano-Dev22/landing-page-futureshop.git
 ```
 
 ### 2. Entrar na pasta do projeto
 
 ```bash
-cd landing-page-futureshop
+cd loja
 ```
 
 ### 3. Criar ambiente virtual
@@ -88,11 +88,7 @@ O objetivo da FutureShop é oferecer uma landing page moderna, responsiva e otim
 
 ---
 
-## 📸 Preview
 
-Adicione aqui prints do projeto futuramente.
-
----
 
 ## 📄 Licença
 
